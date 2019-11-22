@@ -47,13 +47,13 @@ export default function Dashboard() {
     <div>
       <GridContainer>
         {/* Orange card */}
-        <GridItem xs={12} sm={6} md={3}>
+        <GridItem xs={12} sm={4} md={2}>
           <Card>
             <CardHeader color="warning" stats icon>
               <CardIcon color="warning">
                 <Icon>content_copy</Icon>
               </CardIcon>
-              <p className={classes.cardCategory}>Used Space</p>
+              <p className={classes.cardCategory}>New Requests</p>
               <h3 className={classes.cardTitle}>
                 49/50 <small>GB</small>
               </h3>
@@ -71,7 +71,7 @@ export default function Dashboard() {
           </Card>
         </GridItem>
         {/* Green card */}
-        <GridItem xs={12} sm={6} md={3}>
+        <GridItem xs={12} sm={4} md={2}>
           <Card>
             <CardHeader color="success" stats icon>
               <CardIcon color="success">
@@ -89,7 +89,7 @@ export default function Dashboard() {
           </Card>
         </GridItem>
         {/* Red card */}
-        <GridItem xs={12} sm={6} md={3}>
+        <GridItem xs={12} sm={4} md={2}>
           <Card>
             <CardHeader color="danger" stats icon>
               <CardIcon color="danger">
@@ -107,7 +107,7 @@ export default function Dashboard() {
           </Card>
         </GridItem>
         {/* Blue card */}
-        <GridItem xs={12} sm={6} md={3}>
+        <GridItem xs={12} sm={4} md={2}>
           <Card>
             <CardHeader color="info" stats icon>
               <CardIcon color="info">

@@ -46,6 +46,7 @@ export default function Dashboard() {
   return (
     <div>
       <GridContainer>
+        {/* Orange card */}
         <GridItem xs={12} sm={6} md={3}>
           <Card>
             <CardHeader color="warning" stats icon>
@@ -69,6 +70,7 @@ export default function Dashboard() {
             </CardFooter>
           </Card>
         </GridItem>
+        {/* Green card */}
         <GridItem xs={12} sm={6} md={3}>
           <Card>
             <CardHeader color="success" stats icon>
@@ -86,6 +88,7 @@ export default function Dashboard() {
             </CardFooter>
           </Card>
         </GridItem>
+        {/* Red card */}
         <GridItem xs={12} sm={6} md={3}>
           <Card>
             <CardHeader color="danger" stats icon>
@@ -103,6 +106,7 @@ export default function Dashboard() {
             </CardFooter>
           </Card>
         </GridItem>
+        {/* Blue card */}
         <GridItem xs={12} sm={6} md={3}>
           <Card>
             <CardHeader color="info" stats icon>
@@ -122,6 +126,7 @@ export default function Dashboard() {
         </GridItem>
       </GridContainer>
       <GridContainer>
+        {/* Green chart */}
         <GridItem xs={12} sm={12} md={4}>
           <Card chart>
             <CardHeader color="success">
@@ -149,6 +154,7 @@ export default function Dashboard() {
             </CardFooter>
           </Card>
         </GridItem>
+        {/* Orange chart */}
         <GridItem xs={12} sm={12} md={4}>
           <Card chart>
             <CardHeader color="warning">
@@ -172,6 +178,7 @@ export default function Dashboard() {
             </CardFooter>
           </Card>
         </GridItem>
+        {/* Red chart */}
         <GridItem xs={12} sm={12} md={4}>
           <Card chart>
             <CardHeader color="danger">
@@ -196,6 +203,7 @@ export default function Dashboard() {
         </GridItem>
       </GridContainer>
       <GridContainer>
+        {/* Purple TODO List */}
         <GridItem xs={12} sm={12} md={6}>
           <CustomTabs
             title="Tasks:"
@@ -237,6 +245,7 @@ export default function Dashboard() {
             ]}
           />
         </GridItem>
+        {/* Orange CardTable */}
         <GridItem xs={12} sm={12} md={6}>
           <Card>
             <CardHeader color="warning">
