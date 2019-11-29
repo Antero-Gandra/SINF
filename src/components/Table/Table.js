@@ -7,10 +7,14 @@ import TableHead from "@material-ui/core/TableHead";
 import TableRow from "@material-ui/core/TableRow";
 import TableBody from "@material-ui/core/TableBody";
 import TableCell from "@material-ui/core/TableCell";
+//import { useTable, useFilters } from 'react-table'
+// A great library for fuzzy filtering/sorting items
+//import matchSorter from 'match-sorter'
 // core components
 import styles from "assets/jss/material-dashboard-react/components/tableStyle.js";
 
-const useStyles = makeStyles(styles);
+const useStyles = makeStyles(styles);// This is a custom filter UI for selecting
+// a unique option from a list
 
 export default function CustomTable(props) {
   const classes = useStyles();
