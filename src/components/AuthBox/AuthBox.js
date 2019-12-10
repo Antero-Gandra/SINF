@@ -73,6 +73,8 @@ export default function AuthBox() {
     else {
       alert("Invalid Jasmin authentication.");
     }
+
+    
   }
 
   const classes = useStyles();
