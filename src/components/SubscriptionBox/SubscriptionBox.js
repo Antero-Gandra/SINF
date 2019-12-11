@@ -12,8 +12,6 @@ import IconButton from "@material-ui/core/IconButton";
 import Close from "@material-ui/icons/Close";
 import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
-import { requestToken } from "../../api/token.js";
-import { api } from "../../api/endpoints.js";
 
 const useStyles = makeStyles(styles);
 
@@ -53,11 +51,13 @@ export default function SubscriptionBox() {
     let removeIndex = rows.map(function(item) { return item.supplier; }).indexOf(supplier);
     rows.splice(removeIndex, 1);
 
-    let requestTokenPromise = requestToken();
-
-    requestTokenPromise.then(response => response.text().then(data => {
+    fetch("http://localhost:9000/dev/token", {
+      method: 'GET',
+      headers: { 'Content-Type': 'application/json;charset=utf-8' },
+      credentials: 'include'
+    }).then(response => response.json().then(data => {
       console.log(data);
-    }));
+    })); 
   }
 
   const unsubscribeBackEnd = (supplier) => {
