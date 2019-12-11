@@ -35,7 +35,7 @@ const switchRoutes = (
       }
       return null;
     })}
-    <Redirect from="/admin" to="/admin/dashboard" />
+    <Redirect from="/admin" to="/admin/order_list" />
   </Switch>
 );
 
@@ -92,6 +92,7 @@ export default function Admin({ ...rest }) {
         color={"blue"}
         {...rest}
       />
+
       <div className={classes.mainPanel} ref={mainPanel}>
         <Navbar
           routes={routes}
