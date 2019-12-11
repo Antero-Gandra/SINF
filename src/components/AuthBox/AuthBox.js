@@ -9,29 +9,42 @@ import TableCell from "@material-ui/core/TableCell";
 import styles from "assets/jss/material-dashboard-react/components/tasksStyle.js";
 import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
+import FormLabel from '@material-ui/core/FormLabel';
+import FormControl from '@material-ui/core/FormControl';
+import FormControlLabel from '@material-ui/core/FormControlLabel';
+import FormHelperText from '@material-ui/core/FormHelperText';
+import Radio from '@material-ui/core/Radio';
+import RadioGroup from '@material-ui/core/RadioGroup';
+
 
 const useStyles = makeStyles(styles);
 
 export default function AuthBox() {
 
-  const [username, setUsername] = useState("");
-  const [password, setPassword] = useState("");
+  const [tenant, setTenant] = useState("");
+  const [organization, setOrganization] = useState("");
   const [APIkey, setAPIkey] = useState("");
-
+  const [userType, setUserType] = useState("");
+ 
   const handleSubmit = (event) => {
     if (event) {
       event.preventDefault();
     }
 
     callback();
+
+    window.location.replace("/admin");
   }
 
   const classes = useStyles();
 
   const callback = () => {
-    alert(`User synced!
-           Name: ${username}
-           Key: ${APIkey}`);
+    alert(`User logged in!
+           Tenant: ${tenant}
+           Organization: ${organization}
+           Key: ${APIkey}
+           User type: ${userType}`
+    );
   }
 
   return (
@@ -40,13 +53,13 @@ export default function AuthBox() {
         <TableBody>
             <TableRow key={1}>
               <TableCell>
-                <TextField required value={username} onChange={e => setUsername(e.target.value)} label="Enter your username" />
+                <TextField required value={tenant} onChange={e => setTenant(e.target.value)} label="Enter your tenant" />
               </TableCell>
             </TableRow>
 
             <TableRow key={2}>
               <TableCell>
-                <TextField type="password" required value={password} onChange={e => setPassword(e.target.value)} label="Enter your password" />
+                <TextField required value={organization} onChange={e => setOrganization(e.target.value)} label="Enter your organization" />
               </TableCell>
             </TableRow>
 
@@ -54,10 +67,33 @@ export default function AuthBox() {
               <TableCell> 
                 <TextField required value={APIkey} onChange={e => setAPIkey(e.target.value)} label="Enter your API key" />
               </TableCell>
+            </TableRow>
 
+            <TableRow>
               <TableCell> 
-                <Button type="submit" variant="contained">Submit</Button>
-              </TableCell>
+                  <FormControl component="fieldset" className={classes.formControl}>
+                    <RadioGroup aria-label="customerType" name="type" value={userType} onChange={e => setUserType(e.target.value)}>
+                      <FormControlLabel
+                        value="Customer"
+                        control={<Radio color="primary" />}
+                        label="Customer"
+                        labelPlacement="start"
+                      />
+
+                      <FormControlLabel
+                        value="Supplier"
+                        control={<Radio color="primary" />}
+                        label="Supplier"
+                        labelPlacement="start"
+                      />
+                    </RadioGroup>
+                    <FormHelperText> Choose what type of user you are </FormHelperText>
+                  </FormControl>
+                </TableCell>
+
+                <TableCell> 
+                  <Button type="submit" variant="contained">Submit</Button>
+                </TableCell>
             </TableRow>
         </TableBody>
       </Table>
