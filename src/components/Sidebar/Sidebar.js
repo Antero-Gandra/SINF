@@ -11,6 +11,8 @@ import List from "@material-ui/core/List";
 import ListItem from "@material-ui/core/ListItem";
 import ListItemText from "@material-ui/core/ListItemText";
 import Icon from "@material-ui/core/Icon";
+import Button from '@material-ui/core/Button';
+import Container from '@material-ui/core/Container';
 // core components
 import AdminNavbarLinks from "components/Navbars/AdminNavbarLinks.js";
 
@@ -23,6 +25,9 @@ export default function Sidebar(props) {
   // verifies if routeName is the one active (in browser input)
   function activeRoute(routeName) {
     return window.location.href.indexOf(routeName) > -1 ? true : false;
+  }
+  function sync() {
+    console.log('The link was clicked.');
   }
   const { color, logo, image, logoText, routes } = props;
   var links = (
@@ -70,7 +75,13 @@ export default function Sidebar(props) {
           </NavLink>
         );
       })}
+      <Container style={{ alignItems: 'center' }}>
+        <Button onClick={() => { sync() }} style={{ margin: "col-md-6 col-md-offset-3" }} variant="contained" color="primary">
+          Sync
+      </Button>
+      </Container>
     </List>
+
   );
   var brand = logoText.length > 0 ? (
     <div className={classes.logo}>
