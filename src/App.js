@@ -15,7 +15,7 @@ export default function App() {
       <Switch>
         <Route path="/admin" component={Admin} />
         {/* <Route path="/login" component={Login} /> */}
-        <Redirect from="/" to="/admin/template" />
+        <Redirect from="/" to="/admin/order_list" />
       </Switch>
     </Router>
   );
