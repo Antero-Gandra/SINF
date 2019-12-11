@@ -34,7 +34,7 @@ export default function AuthBox() {
 
     let loginAPI = login();
 
-    login.then(response => response.json().then(data => {
+    loginAPI.then(response => response.json().then(data => {
       console.log(response);
       // other handling here possibly?
       window.location.replace("/admin");
