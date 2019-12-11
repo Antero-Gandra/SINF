@@ -9,13 +9,12 @@ import TableCell from "@material-ui/core/TableCell";
 import styles from "assets/jss/material-dashboard-react/components/tasksStyle.js";
 import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
-import FormLabel from '@material-ui/core/FormLabel';
 import FormControl from '@material-ui/core/FormControl';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
 import FormHelperText from '@material-ui/core/FormHelperText';
 import Radio from '@material-ui/core/Radio';
 import RadioGroup from '@material-ui/core/RadioGroup';
-
+import { login } from "../../requests/requests.js";
 
 const useStyles = makeStyles(styles);
 
@@ -33,7 +32,14 @@ export default function AuthBox() {
 
     callback();
 
-    window.location.replace("/admin");
+    let loginAPI = login();
+
+    login.then(response => response.json().then(data => {
+      console.log(response);
+      // other handling here possibly?
+      window.location.replace("/admin");
+    }))
+
   }
 
   const classes = useStyles();

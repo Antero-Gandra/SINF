@@ -9,3 +9,14 @@ export function getToken(){
         }
     });
 }
+
+export function login(){
+    // change the link to the proper endpoint
+    return fetch(apiHost + "", {
+        method: 'POST',
+        headers: { 
+                'Content-Type': 'application/json;charset=utf-8',
+                'Access-Control-Allow-Origin': '*' 
+        }
+    });
+}
