@@ -15,6 +15,7 @@ import Button from '@material-ui/core/Button';
 import Container from '@material-ui/core/Container';
 // core components
 import AdminNavbarLinks from "components/Navbars/AdminNavbarLinks.js";
+import {syncronizeCustomer, syncronizeSupplier} from "../../requests/requests.js";
 
 import styles from "assets/jss/material-dashboard-react/components/sidebarStyle.js";
 
@@ -26,8 +27,20 @@ export default function Sidebar(props) {
   function activeRoute(routeName) {
     return window.location.href.indexOf(routeName) > -1 ? true : false;
   }
-  function sync() {
-    console.log('The link was clicked.');
+  const doSyncCustomer = () => {
+    let sync = syncronizeCustomer();
+
+    sync.then(response => response.json().then(data => {
+      console.log(data);
+    }));
+  }
+
+  const doSyncSupplier = () => {
+    let sync = syncronizeSupplier();
+
+    sync.then(response => response.json().then(data => {
+      console.log(data);
+    }));
   }
   const { color, logo, image, logoText, routes } = props;
   var links = (
@@ -76,9 +89,12 @@ export default function Sidebar(props) {
         );
       })}
       <Container style={{ alignItems: 'center' }}>
-        <Button onClick={() => { sync() }} style={{ margin: "col-md-6 col-md-offset-3" }} variant="contained" color="primary">
-          Sync
-      </Button>
+        <Button onClick={() => { doSyncCustomer() }} style={{ margin: "2em" }} variant="contained" color="primary">
+          Sync Customer
+        </Button>
+        <Button onClick={() => { doSyncSupplier() }} style={{ margin: "2em" }} variant="contained" color="primary">
+          Sync Supplier
+        </Button>
       </Container>
     </List>
 
