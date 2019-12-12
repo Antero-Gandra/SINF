@@ -5,7 +5,7 @@ import ListIcon from '@material-ui/icons/List';
 // core components/views for Admin layout
 import MasterDataPage from "views/MasterData/MasterData.js";
 import OrderList from "views/creativetim/OrderList/OrderList.js";
-import ProductList from "views/creativetim/ProductList/ProductList.js";
+import AvailableBrands from "views/creativetim/AvailableBrands/AvailableBrands.js";
 
 const dashboardRoutes = [
   {
@@ -23,10 +23,10 @@ const dashboardRoutes = [
     layout: "/admin"
   },
   {
-    path: "/product_catalog",
-    name: "Product Catalog",
+    path: "/available_brands",
+    name: "Available Brands",
     icon: ListIcon,
-    component: ProductList,
+    component: AvailableBrands,
     layout: "/admin"
   }
 ];

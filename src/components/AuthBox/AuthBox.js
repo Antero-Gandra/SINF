@@ -18,12 +18,22 @@ import { login } from "../../requests/requests.js";
 
 const useStyles = makeStyles(styles);
 
+const useStateWithLocalStorage = localStorageKey => {
+  const [value, setValue] = React.useState(
+    localStorage.getItem(localStorageKey) || ''
+  );
+  React.useEffect(() => {
+    localStorage.setItem(localStorageKey, value);
+  }, [value]);
+  return [value, setValue];
+};
+
 export default function AuthBox() {
 
-  const [tenant, setTenant] = useState("");
-  const [organization, setOrganization] = useState("");
-  const [APIkey, setAPIkey] = useState("");
-  const [userType, setUserType] = useState("");
+  const [tenant, setTenant] = useStateWithLocalStorage('tenant');
+  const [organization, setOrganization] = useStateWithLocalStorage('organization');
+  const [APIkey, setAPIkey] = useStateWithLocalStorage('key');
+  const [userType, setUserType] = useStateWithLocalStorage('userType');
  
   const handleSubmit = (event) => {
     if (event) {

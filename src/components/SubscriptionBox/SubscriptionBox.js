@@ -52,11 +52,11 @@ export default function SubscriptionBox() {
     let removeIndex = rows.map(function(item) { return item.supplier; }).indexOf(supplier);
     rows.splice(removeIndex, 1);
 
-    let tokenPromise = getToken();
+    /*let tokenPromise = getToken();
 
     tokenPromise.then(response => response.json().then(data => {
       console.log(data);
-    }));
+    }));*/
   }
 
   const unsubscribeBackEnd = (supplier) => {
