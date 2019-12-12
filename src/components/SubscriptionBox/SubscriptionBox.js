@@ -57,6 +57,12 @@ export default function SubscriptionBox() {
     tokenPromise.then(response => response.json().then(data => {
       console.log(data);
     }));*/
+
+    console.log(localStorage.getItem('userType'));
+    console.log(localStorage.getItem('tenant'));
+    console.log(localStorage.getItem('organization'));
+    console.log(localStorage.getItem('key'));
+
   }
 
   const unsubscribeBackEnd = (supplier) => {

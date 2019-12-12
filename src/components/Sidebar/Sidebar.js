@@ -42,6 +42,11 @@ export default function Sidebar(props) {
       console.log(data);
     }));
   }
+
+  const logout = () => {
+    window.location.replace("/auth");
+  }
+
   const { color, logo, image, logoText, routes } = props;
   var links = (
     <List className={classes.list}>
@@ -89,11 +94,20 @@ export default function Sidebar(props) {
         );
       })}
       <Container style={{ alignItems: 'center' }}>
-        <Button onClick={() => { doSyncCustomer() }} style={{ margin: "2em" }} variant="contained" color="primary">
-          Sync Customer
-        </Button>
-        <Button onClick={() => { doSyncSupplier() }} style={{ margin: "2em" }} variant="contained" color="primary">
-          Sync Supplier
+        {localStorage.getItem('userType') === "Customer" && 
+          <Button onClick={() => { doSyncCustomer() }} style={{ margin: "2em" }} variant="contained" color="primary">
+            Sync Customer
+          </Button>
+        }
+
+        {localStorage.getItem('userType') === "Supplier" && 
+          <Button onClick={() => { doSyncSupplier() }} style={{ margin: "2em" }} variant="contained" color="primary">
+            Sync Supplier
+          </Button>
+        }
+
+        <Button onClick={() => { logout() }} style={{ margin: "2em" }} variant="contained" color="primary">
+          Logout
         </Button>
       </Container>
     </List>

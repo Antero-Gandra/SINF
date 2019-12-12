@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect } from "react";
 // @material-ui/core components
 import { makeStyles } from "@material-ui/core/styles";
 import Table from "@material-ui/core/Table";
@@ -49,7 +49,6 @@ export default function AuthBox() {
       // other handling here possibly?
       window.location.replace("/admin");
     }))
-
   }
 
   const classes = useStyles();
@@ -88,7 +87,7 @@ export default function AuthBox() {
             <TableRow>
               <TableCell> 
                   <FormControl component="fieldset" className={classes.formControl}>
-                    <RadioGroup aria-label="customerType" name="type" value={userType} onChange={e => setUserType(e.target.value)}>
+                    <RadioGroup required aria-label="customerType" name="type" value={userType} onChange={e => setUserType(e.target.value)}>
                       <FormControlLabel
                         value="Customer"
                         control={<Radio color="primary" />}
