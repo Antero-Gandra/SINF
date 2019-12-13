@@ -8,6 +8,7 @@ import Table from "components/Table/Table.js";
 import Card from "components/Card/Card.js";
 import CardHeader from "components/Card/CardHeader.js";
 import CardBody from "components/Card/CardBody.js";
+import OrderTable from "components/OrderTable/OrderTable.js";
 
 const styles = {
   cardCategoryWhite: {
@@ -54,18 +55,7 @@ export default function TableList() {
             </p>
           </CardHeader>
           <CardBody>
-            <Table
-              tableHeaderColor="primary"
-              tableHead={["Order", "Created", "Status", "Supplier", "Due", "Product", "Total", "Pin"]}
-              tableData={[
-                ["Dakota Rice", "Niger", "Oud-Turnhout", "$36,738", "$36,738", "$36,738", "$36,738", "$36,738"],
-                ["Minerva Hooper", "Curaçao", "Sinaai-Waas", "$23,789", "$36,738", "$36,738", "$36,738", "$36,738"],
-                ["Sage Rodriguez", "Netherlands", "Baileux", "$56,142", "$36,738", "$36,738", "$36,738","$36,738"],
-                ["Philip Chaney", "Korea, South", "Overland Park", "$38,735", "$36,738", "$36,738", "$36,738", "$36,738"],
-                ["Doris Greene", "Malawi", "Feldkirchen in Kärnten", "$63,542", "$36,738", "$36,738", "$36,738", "$36,738"],
-                ["Mason Porter", "Chile", "Gloucester", "$78,615", "$36,738", "$36,738", "$36,738", "$36,738"]
-              ]}
-            />
+           <OrderTable />
           </CardBody>
         </Card>
       </GridItem>
