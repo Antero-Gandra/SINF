@@ -18,15 +18,15 @@ function createData(order, created, status, supplier, due, product, total, pin){
   return {order, created, status, supplier, due, product, total, pin};
 }
 
-export default function SubscriptionBox() {
+export default function OrderTable() {
   const classes = useStyles();
 
   // will have to fetch values from the database instead of having these hardcoded here ..
   // GET API call of subscribers
   const [rows, setRows] = useState([
-    createData('Dakota Rice', '20 Oct', 'Sent','RiceLDA','22 Oct', 'rice', '103€', false),
-    createData('Dakota Rice', '20 Oct', 'Sent','RiceLDA','22 Oct', 'rice', '103€', false),
-    createData('Dakota Rice', '20 Oct', 'Sent','RiceLDA','22 Oct', 'rice', '103€', false),
+    createData('ORD-234', '20 Oct', 'Sent','RiceLDA','22 Oct', 'rice', '103€', false),
+    createData('ORD-122', '20 Oct', 'Sent','RiceLA','22 Oct', 'rice', '103€', false),
+    createData('ORD-245', '20 Oct', 'Sent','RicDA','22 Oct', 'rice', '103€', false),
   ]);
 
   const unsubscribeFrontEnd = (order) => {
@@ -66,7 +66,7 @@ export default function SubscriptionBox() {
         </TableHead>
         <TableBody>
           {rows.map(row => (
-            <TableRow key={row.supplier}>
+            <TableRow key={row.order}>
               <TableCell align="center" component="th" scope="row">
                 {row.supplier}
               </TableCell>
