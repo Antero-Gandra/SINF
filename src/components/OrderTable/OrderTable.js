@@ -10,8 +10,6 @@ import styles from "assets/jss/material-dashboard-react/components/tasksStyle.js
 import TableHead from '@material-ui/core/TableHead';
 import IconButton from "@material-ui/core/IconButton";
 import Close from "@material-ui/icons/Close";
-import TextField from '@material-ui/core/TextField';
-import Button from '@material-ui/core/Button';
 import {getToken} from "../../requests/requests.js";
 
 const useStyles = makeStyles(styles);
@@ -23,27 +21,12 @@ function createData(order, created, status, supplier, due, product, total, pin){
 export default function SubscriptionBox() {
   const classes = useStyles();
 
-  const errorStyle = {
-    color: 'red',
-    fontSize: '13px',
-  };
-
-  const [APIkey, setAPIkey] = useState("");
-  const [APIkeyErrors, setAPIkeyErrors] = useState(false);
-
-  const checkAPIkey = () => {
-    let isValid = true;
-    // API call to check GET API key
-    return isValid;
-  }
-
   // will have to fetch values from the database instead of having these hardcoded here ..
   // GET API call of subscribers
   const [rows, setRows] = useState([
     createData('Dakota Rice', '20 Oct', 'Sent','RiceLDA','22 Oct', 'rice', '103€', false),
     createData('Dakota Rice', '20 Oct', 'Sent','RiceLDA','22 Oct', 'rice', '103€', false),
     createData('Dakota Rice', '20 Oct', 'Sent','RiceLDA','22 Oct', 'rice', '103€', false),
-
   ]);
 
   const unsubscribeFrontEnd = (order) => {
@@ -67,39 +50,7 @@ export default function SubscriptionBox() {
     unsubscribeBackEnd(order);
   }
 
-  const handleValidation = () => {
-    let isValid = true;
-
-    if(!checkAPIkey()){
-      setAPIkeyErrors(true);
-      isValid = false;
-    }
-
-    return isValid;
-  }
-
-  const handleSubmit = (event) => {
-    if (event) {
-      event.preventDefault();
-    }
-
-    if(handleValidation()){
-      callback();
-    }
-
-    else {
-      alert("Invalid Jasmin authentication.");
-    }
-  }
-
-  const callback = () => {
-    alert(`Subscribed!
-           Key: ${APIkey}`);
-    // API call to SUBSCRIBE (POST?)
-  }
-
   return (
-    <form onSubmit={handleSubmit}>
       <Table>
         <TableHead>
           <TableRow>
@@ -134,6 +85,5 @@ export default function SubscriptionBox() {
           ))} 
         </TableBody>
       </Table>
-    </form>
   );
 }

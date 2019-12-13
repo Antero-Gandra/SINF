@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React from "react";
 // @material-ui/core components
 import { makeStyles } from "@material-ui/core/styles";
 import Table from "@material-ui/core/Table";
@@ -25,6 +25,7 @@ const useStateWithLocalStorage = localStorageKey => {
   React.useEffect(() => {
     localStorage.setItem(localStorageKey, value);
   }, [value]);
+  
   return [value, setValue];
 };
 
