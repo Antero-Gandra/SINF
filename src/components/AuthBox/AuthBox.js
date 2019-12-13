@@ -25,7 +25,7 @@ const useStateWithLocalStorage = localStorageKey => {
   React.useEffect(() => {
     localStorage.setItem(localStorageKey, value);
   }, [value]);
-  
+
   return [value, setValue];
 };
 
@@ -33,7 +33,7 @@ export default function AuthBox() {
 
   const [tenant, setTenant] = useStateWithLocalStorage('tenant');
   const [organization, setOrganization] = useStateWithLocalStorage('organization');
-  const [APIkey, setAPIkey] = useStateWithLocalStorage('key');
+  const [company, setCompany] = useStateWithLocalStorage('key');
   const [userType, setUserType] = useStateWithLocalStorage('userType');
  
   const handleSubmit = (event) => {
@@ -43,12 +43,11 @@ export default function AuthBox() {
 
     callback();
 
-    let loginAPI = login();
+    let loginAPI = login(tenant, organization, company, userType);
 
     loginAPI.then(response => response.json().then(data => {
       console.log(response);
       // other handling here possibly?
-      window.location.replace("/admin");
     }))
   }
 
@@ -58,7 +57,7 @@ export default function AuthBox() {
     alert(`User logged in!
            Tenant: ${tenant}
            Organization: ${organization}
-           Key: ${APIkey}
+           Company: ${company}
            User type: ${userType}`
     );
   }
@@ -81,7 +80,7 @@ export default function AuthBox() {
 
             <TableRow key={3}>
               <TableCell> 
-                <TextField required value={APIkey} onChange={e => setAPIkey(e.target.value)} label="Enter your API key" />
+                <TextField required value={company} onChange={e => setCompany(e.target.value)} label="Enter your company" />
               </TableCell>
             </TableRow>
 

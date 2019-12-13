@@ -31,13 +31,34 @@ export function syncronizeSupplier(){
 }
 
 
-export function login(){
-    // change the link to the proper endpoint
-    return fetch(apiHost + "", {
-        method: 'POST',
-        headers: { 
+export function login(tenant, organization, company, userType){
+    if(userType === "Customer"){
+        return fetch(apiHost + "/user/customer/add", {
+            method: 'POST',
+            headers: { 
                 'Content-Type': 'application/json;charset=utf-8',
                 'Access-Control-Allow-Origin': '*' 
-        }
-    });
+            },
+            body: JSON.stringify({
+                "tenant": tenant,
+                "organization": organization,
+                "company": company
+            })          
+        });
+    }
+
+    if(userType === "Supplier"){
+        return fetch(apiHost + "/user/supplier/add", {
+            method: 'POST',
+            headers: { 
+                'Content-Type': 'application/json;charset=utf-8',
+                'Access-Control-Allow-Origin': '*' 
+            },
+            body: JSON.stringify({
+                "tenant": tenant,
+                "organization": organization,
+                "company": company
+            })        
+        });
+    }
 }
