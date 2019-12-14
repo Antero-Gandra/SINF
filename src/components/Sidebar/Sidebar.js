@@ -42,7 +42,7 @@ export default function Sidebar(props) {
             orderId:"ORD-" + data[i].order_id, 
             stage:data[i].stage, 
             purchaseOrderName:data[i].purchase_order_uuid,
-            supplierOrCustomer:data[i].organization,
+            supplierOrCustomer:data[i].company_name,
             items:"UNKOWN"
           });
         }
@@ -59,7 +59,7 @@ export default function Sidebar(props) {
               localStored.push({
                 subscriptionId:"SUB-" + data[i].subscription_id, 
                 brandName:data[i].brand_name, 
-                customerOrSupplier:data[i].supplier_id,
+                customerOrSupplier:data[i].company_name,
                 createdAt:data[i].subscription_createdat              
               });
             }
@@ -89,7 +89,7 @@ export default function Sidebar(props) {
             orderId:"ORD-" + data[i].order_id, 
             stage:data[i].stage, 
             purchaseOrderName:data[i].purchase_order_uuid,
-            supplierOrCustomer:data[i].organization,
+            supplierOrCustomer:data[i].company_name,
             items:"UNKOWN"
           });
         }
@@ -106,7 +106,7 @@ export default function Sidebar(props) {
             localStored.push({
               subscriptionId:"SUB-" + data[i].subscription_id, 
               brandName:data[i].brand_name, 
-              customerOrSupplier:data[i].customer_id,
+              customerOrSupplier:data[i].company_name,
               createdAt:data[i].subscription_createdat              
             });
           }
