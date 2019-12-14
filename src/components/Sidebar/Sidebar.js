@@ -28,51 +28,60 @@ export default function Sidebar(props) {
     return window.location.href.indexOf(routeName) > -1 ? true : false;
   }
   const doSyncCustomer = () => {
-    let sync = syncronizeCustomer();
+    let sync = syncronizeCustomer(localStorage.getItem('tenant'), localStorage.getItem('organization'));
 
-    sync.then(response => response.json().then(data => {
-      console.log(data);
-      let localStored = [];
+    sync
+      .then(response => response.json().then(data => {
+        console.log(data);
 
-      for(let i = 0; i < data.length; i++){
-        localStored.push({
-          orderId:"ORD-" + data[i].order_id, 
-          stage:data[i].stage, 
-          purchaseOrderName:data[i].purchase_order_uuid,
-          supplierOrCustomer:data[i].organization,
-          items:"UNKOWN"
-        });
-      }
+        let localStored = [];
 
-      console.log(localStored);
-      localStorage.setItem('userOrders', JSON.stringify(localStored)); 
-      console.log(localStorage.getItem('userOrders'));
-      window.location.reload(false);
-    }));
+        for(let i = 0; i < data.length; i++){
+          localStored.push({
+            orderId:"ORD-" + data[i].order_id, 
+            stage:data[i].stage, 
+            purchaseOrderName:data[i].purchase_order_uuid,
+            supplierOrCustomer:data[i].organization,
+            items:"UNKOWN"
+          });
+        }
+
+        console.log(localStored);
+        localStorage.setItem('userOrders', JSON.stringify(localStored)); 
+        console.log(localStorage.getItem('userOrders'));
+        //window.location.reload(false);
+      }))
+      .catch(error => {
+        console.log(error);
+      });
   }
 
   const doSyncSupplier = () => {
-    let sync = syncronizeSupplier();
+    let sync = syncronizeSupplier(localStorage.getItem('tenant'), localStorage.getItem('organization'));
 
-    sync.then(response => response.json().then(data => {
-      console.log(data);
-      let localStored = [];
+    sync
+      .then(response => response.json().then(data => {
+        console.log(data);
+        let localStored = [];
 
-      for(let i = 0; i < data.length; i++){
-        localStored.push({
-          orderId:"ORD-" + data[i].order_id, 
-          stage:data[i].stage, 
-          purchaseOrderName:data[i].purchase_order_uuid,
-          supplierOrCustomer:data[i].organization,
-          items:"UNKOWN"
-        });
-      }
+        for(let i = 0; i < data.length; i++){
+          localStored.push({
+            orderId:"ORD-" + data[i].order_id, 
+            stage:data[i].stage, 
+            purchaseOrderName:data[i].purchase_order_uuid,
+            supplierOrCustomer:data[i].organization,
+            items:"UNKOWN"
+          });
+        }
 
-      console.log(localStored);
-      localStorage.setItem('userOrders', JSON.stringify(localStored)); 
-      console.log(localStorage.getItem('userOrders'));
-      window.location.reload(false);
-    }));
+        console.log(localStored);
+        localStorage.setItem('userOrders', JSON.stringify(localStored)); 
+        console.log(localStorage.getItem('userOrders'));
+        window.location.reload(false);
+      }))
+      .catch(error => {
+        alert(error);
+      });
   }
 
   const logout = () => {
