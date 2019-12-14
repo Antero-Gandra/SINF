@@ -32,6 +32,21 @@ export default function Sidebar(props) {
 
     sync.then(response => response.json().then(data => {
       console.log(data);
+      let localStored = [];
+
+      for(let i = 0; i < data.length; i++){
+        localStored.push({
+          orderId:data[i].itemKey, 
+          stage:data[i].baseEntityId, 
+          purchaseOrderName:data[i].baseUnit,
+          supplierOrCustomer:data[i].baseUnitDescription,
+          items:data[i].baseUnitId
+        });
+      }
+
+      console.log(localStored);
+      localStorage.setItem('userOrders', JSON.stringify(localStored)); 
+      console.log(localStorage.getItem('userOrders'));
     }));
   }
 

@@ -26,48 +26,36 @@ export default function OrderTable() {
 
   // will have to fetch values from the database instead of having these hardcoded here ..
   // GET API call of subscribers
-  const [rows, setRows] = useState([
-    createData('ORD-234', 'PURCHASE_ORDER', 'FORTNITE','RiceLDA','FORT1, FORT2, ..'),
-    createData('ORD-122', 'PURCHASE_ORDER', 'SOMETHING','RiceLA','Stuff1, stuff2, ..'),
-    createData('ORD-245', 'PURCHASE_ORDER', 'ELSE','RicDA','Else1, Else2, ..'),
-  ]);
 
-  const unsubscribeFrontEnd = (order) => {
-    setRows(rows.filter(item => item.order !== order));
-    let removeIndex = rows.map(function(item) { return item.order; }).indexOf(order);
-    rows.splice(removeIndex, 1);
-
-    let tokenPromise = getToken();
-
-    tokenPromise.then(response => response.json().then(data => {
-      console.log(data);
-    }));
-  }
-
-  const unsubscribeBackEnd = (supplier) => {
-    // DELETE API call to unsubscribe
-  }
-
-  const unsubscribe = (order) => {
-    unsubscribeFrontEnd(order);
-    unsubscribeBackEnd(order);
-  }
+  const [rows, setRows] = useState('');
 
   const generateSalesOrder = (orderId) => {
     console.log("generate sometjing for: " + orderId);
-  }
-
-  const acceptOrder = (orderId) => {
-    console.log("accept for order: " + orderId);
   }
 
   const rejectOrder = (orderId) => {
     console.log("reject for order: " + orderId);
   }
 
-  const cancelOrder = (orderId) => {
-    console.log("cancelled order: " + orderId);
+  const generateSalesInvoice = (orderId) => {
+    console.log("generate sales invoice for order: " + orderId);
   }
+
+  const getOrders = () => {
+    let localStoredOrders = JSON.stringify(localStorage.getItem('userOrders'));
+
+    if(localStoredOrders !== null){
+      let JSONparsed = JSON.parse(JSON.parse(localStoredOrders || '') || '');
+      return JSONparsed;
+    }
+
+    return '';
+  }
+
+  useEffect(() => {
+    let localStoredOrders = getOrders();
+    setRows(localStoredOrders);    
+  }, []);
 
   return (
       <Table>
@@ -88,11 +76,11 @@ export default function OrderTable() {
             <TableCell align="center">Items</TableCell>
 
             {localStorage.getItem('userType') === "Customer" &&
-              <TableCell align="center">Cancel Order</TableCell>
+              <TableCell align="center">Purchase Invoice</TableCell>
             }
 
             {localStorage.getItem('userType') === "Supplier" &&
-              <TableCell align="center">Accept/Reject</TableCell>
+              <TableCell align="center">Reject</TableCell>
             }
 
             {localStorage.getItem('userType') === "Supplier" &&
@@ -101,7 +89,7 @@ export default function OrderTable() {
           </TableRow>
         </TableHead>
         <TableBody>
-          {rows.map(row => (
+          { rows !== '' && rows.map(row => (
             <TableRow key={row.orderId}>
               <TableCell align="center" component="th" scope="row">
                 {row.orderId}
@@ -111,20 +99,24 @@ export default function OrderTable() {
               <TableCell align="center">{row.supplierOrCustomer}</TableCell>
               <TableCell align="center">{row.items}</TableCell>
 
-              {localStorage.getItem('userType') === "Customer" &&
+              {localStorage.getItem('userType') === "Customer" && row.stage !== "SALES_INVOICE" &&
                 <TableCell align="center">
-                  <IconButton onClick={() => cancelOrder(row.orderId)} aria-label="Close" className={classes.tableActionButton}>
-                    <Close className={classes.tableActionButtonIcon + " " + classes.close}/>
-                  </IconButton>
+                  <Button style={{ margin: "2em" }} variant="contained" color="primary" disabled>
+                    Generate Purchase Invoice
+                  </Button>
+                </TableCell>
+              }
+
+              {localStorage.getItem('userType') === "Customer" && row.stage === "SALES_INVOICE" &&
+                <TableCell align="center">
+                  <Button onClick={() => { generateSalesInvoice(row.orderId) }} style={{ margin: "2em" }} variant="contained" color="primary">
+                    Generate Purchase Invoice
+                  </Button>
                 </TableCell>
               }
 
               {localStorage.getItem('userType') === "Supplier" &&
                 <TableCell align="center">
-                  <IconButton onClick={() => acceptOrder(row.orderId)} aria-label="Check" className={classes.tableActionButton}>
-                    <Check className={classes.tableActionButtonIcon + " " + classes.check} />
-                  </IconButton>
-
                   <IconButton onClick={() => rejectOrder(row.orderId)} aria-label="Close" className={classes.tableActionButton}>
                     <Close className={classes.tableActionButtonIcon + " " + classes.close}/>
                   </IconButton>
