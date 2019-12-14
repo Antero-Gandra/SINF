@@ -47,10 +47,7 @@ export default function Sidebar(props) {
           });
         }
 
-        //console.log(localStored);
         localStorage.setItem('userOrders', JSON.stringify(localStored)); 
-        //console.log(localStorage.getItem('userOrders'));
-        //window.location.reload(false);
 
         fetchSubscriptionsCustomer(localStorage.getItem('tenant'), localStorage.getItem('organization'), localStorage.getItem('key'))
           .then(response => response.json().then(data => {
@@ -61,13 +58,14 @@ export default function Sidebar(props) {
             for(let i = 0; i < data.length; i++){
               localStored.push({
                 subscriptionId:"SUB-" + data[i].subscription_id, 
-                brandName:data[i].brand_id, 
+                brandName:data[i].brand_name, 
                 customerOrSupplier:data[i].supplier_id,
                 createdAt:data[i].subscription_createdat              
               });
             }
             
             localStorage.setItem('userSubscriptions', JSON.stringify(localStored));
+            window.location.reload(false);
           }))
           .catch(error => {
             console.log(error);
@@ -96,10 +94,7 @@ export default function Sidebar(props) {
           });
         }
 
-        //console.log(localStored);
         localStorage.setItem('userOrders', JSON.stringify(localStored)); 
-        //console.log(localStorage.getItem('userOrders'));
-        //window.location.reload(false);
 
         fetchSubscriptionsSupplier(localStorage.getItem('tenant'), localStorage.getItem('organization'), localStorage.getItem('key'))
         .then(response => response.json().then(data => {
@@ -110,13 +105,14 @@ export default function Sidebar(props) {
           for(let i = 0; i < data.length; i++){
             localStored.push({
               subscriptionId:"SUB-" + data[i].subscription_id, 
-              brandName:data[i].brand_id, 
+              brandName:data[i].brand_name, 
               customerOrSupplier:data[i].customer_id,
               createdAt:data[i].subscription_createdat              
             });
           }
           
           localStorage.setItem('userSubscriptions', JSON.stringify(localStored));
+          window.location.reload(false);
         }))
         .catch(error => {
           console.log(error);
