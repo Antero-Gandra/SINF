@@ -15,7 +15,7 @@ import Button from '@material-ui/core/Button';
 import Container from '@material-ui/core/Container';
 // core components
 import AdminNavbarLinks from "components/Navbars/AdminNavbarLinks.js";
-import {syncronizeCustomer, syncronizeSupplier, fetchSubscriptionsCustomer} from "../../requests/requests.js";
+import {syncronizeCustomer, syncronizeSupplier, fetchSubscriptionsCustomer, fetchSubscriptionsSupplier} from "../../requests/requests.js";
 
 import styles from "assets/jss/material-dashboard-react/components/sidebarStyle.js";
 
@@ -62,7 +62,7 @@ export default function Sidebar(props) {
               localStored.push({
                 subscriptionId:"SUB-" + data[i].subscription_id, 
                 brandName:data[i].brand_id, 
-                customerOrSupplier:data[i].customer_company_uuid,
+                customerOrSupplier:data[i].supplier_id,
                 createdAt:data[i].subscription_createdat              
               });
             }
@@ -96,10 +96,31 @@ export default function Sidebar(props) {
           });
         }
 
-        console.log(localStored);
+        //console.log(localStored);
         localStorage.setItem('userOrders', JSON.stringify(localStored)); 
-        console.log(localStorage.getItem('userOrders'));
-        window.location.reload(false);
+        //console.log(localStorage.getItem('userOrders'));
+        //window.location.reload(false);
+
+        fetchSubscriptionsSupplier(localStorage.getItem('tenant'), localStorage.getItem('organization'), localStorage.getItem('key'))
+        .then(response => response.json().then(data => {
+          console.log(data);
+
+          let localStored = [];
+
+          for(let i = 0; i < data.length; i++){
+            localStored.push({
+              subscriptionId:"SUB-" + data[i].subscription_id, 
+              brandName:data[i].brand_id, 
+              customerOrSupplier:data[i].customer_id,
+              createdAt:data[i].subscription_createdat              
+            });
+          }
+          
+          localStorage.setItem('userSubscriptions', JSON.stringify(localStored));
+        }))
+        .catch(error => {
+          console.log(error);
+        })
       }))
       .catch(error => {
         alert(error);
