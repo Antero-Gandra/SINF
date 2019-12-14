@@ -10,15 +10,9 @@ import styles from "assets/jss/material-dashboard-react/components/tasksStyle.js
 import TableHead from '@material-ui/core/TableHead';
 import IconButton from "@material-ui/core/IconButton";
 import Close from "@material-ui/icons/Close";
-import Check from "@material-ui/icons/Check";
-import {getToken} from "../../requests/requests.js";
 import Button from '@material-ui/core/Button';
 
 const useStyles = makeStyles(styles);
-
-function createData(orderId, stage, purchaseOrderName, supplierOrCustomer, items){
-  return {orderId, stage, purchaseOrderName, supplierOrCustomer, items};
-}
 
 export default function OrderTable() {
   
@@ -42,11 +36,13 @@ export default function OrderTable() {
   }
 
   const getOrders = () => {
-    let localStoredOrders = JSON.stringify(localStorage.getItem('userOrders'));
+    if(localStorage.getItem('userOrders') !== null){
+      let localStoredOrders = JSON.stringify(localStorage.getItem('userOrders'));
 
-    if(localStoredOrders !== null){
-      let JSONparsed = JSON.parse(JSON.parse(localStoredOrders || '') || '');
-      return JSONparsed;
+      if(localStoredOrders !== null){
+        let JSONparsed = JSON.parse(JSON.parse(localStoredOrders || '') || '');
+        return JSONparsed;
+      }
     }
 
     return '';
