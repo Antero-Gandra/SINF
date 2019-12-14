@@ -44,6 +44,7 @@ export default function Sidebar(props) {
   }
 
   const logout = () => {
+    localStorage.clear();
     window.location.replace("/auth");
   }
 

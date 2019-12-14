@@ -14,7 +14,10 @@ export default function App() {
   return (
     <Router history={hist}>
       <Switch>
-        <Route path="/admin" component={Admin} />
+        <Route path="/admin" render={() => { 
+          if(localStorage.getItem('userType') === '') return <Redirect to="/auth"/>; 
+          else return <Admin/>; 
+        }}/>
         <Route path="/auth" component={Authentication} />
         {/* <Route path="/login" component={Login} /> */}
         <Redirect from="/" to="/auth" />

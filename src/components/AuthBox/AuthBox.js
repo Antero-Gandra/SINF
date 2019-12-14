@@ -41,12 +41,17 @@ export default function AuthBox() {
       event.preventDefault();
     }
 
+    if(userType === ''){
+      alert("Select which type of user you are first!");
+      return;
+    }
+
     callback();
 
     let loginAPI = login(tenant, organization, company, userType);
 
     loginAPI.then(response => response.json().then(data => {
-      console.log(response);
+      console.log(data);
       window.location.replace("/admin");
     }))
   }
@@ -87,7 +92,7 @@ export default function AuthBox() {
             <TableRow>
               <TableCell> 
                   <FormControl component="fieldset" className={classes.formControl}>
-                    <RadioGroup required aria-label="customerType" name="type" value={userType} onChange={e => setUserType(e.target.value)}>
+                    <RadioGroup aria-label="customerType" name="type" value={userType} onChange={e => setUserType(e.target.value)}>
                       <FormControlLabel
                         value="Customer"
                         control={<Radio color="primary" />}

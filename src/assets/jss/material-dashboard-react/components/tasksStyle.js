@@ -2,6 +2,7 @@ import {
   defaultFont,
   primaryColor,
   dangerColor,
+  successColor,
   grayColor
 } from "assets/jss/material-dashboard-react.js";
 import tooltipStyle from "assets/jss/material-dashboard-react/tooltipStyle.js";
@@ -51,6 +52,11 @@ const tasksStyle = {
   close: {
     backgroundColor: "transparent",
     color: dangerColor[0],
+    boxShadow: "none"
+  },
+  check: {
+    backgroundColor: "transparent",
+    color: successColor[0],
     boxShadow: "none"
   }
 };
