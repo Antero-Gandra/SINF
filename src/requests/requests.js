@@ -11,7 +11,7 @@ export function getToken(){
 }
 
 export function syncronizeCustomer(tenant, organization){
-    return fetch(apiHost + "/dev/sync/customer" + "?" + "tenant=" + tenant + "&" + "organization=" + organization, {
+    return fetch(apiHost + "/dev/sync/customer?" + "tenant=" + tenant + "&organization=" + organization, {
         method: 'GET',
         headers: { 
             'Content-Type': 'application/json;charset=utf-8',
@@ -21,7 +21,17 @@ export function syncronizeCustomer(tenant, organization){
 }
 
 export function syncronizeSupplier(tenant, organization){
-    return fetch(apiHost + "/dev/sync/supplier" + "?" + "tenant=" + tenant + "&" + "organization=" + organization, {
+    return fetch(apiHost + "/dev/sync/supplier?" + "tenant=" + tenant + "&organization=" + organization, {
+        method: 'GET',
+        headers: { 
+            'Content-Type': 'application/json;charset=utf-8',
+            'Access-Control-Allow-Origin': '*' 
+        } 
+    });
+}
+
+export function fetchSubscriptionsCustomer(tenant, organization, company){
+    return fetch(apiHost + "/subscriptions/get/all/customer?" + "tenant=" + tenant + "&organization=" + organization + "&company=" + company, {
         method: 'GET',
         headers: { 
             'Content-Type': 'application/json;charset=utf-8',
