@@ -46,20 +46,25 @@ export default function AuthBox() {
       return;
     }
 
-    callback();
-
     let loginAPI = login(tenant, organization, company, userType);
 
     loginAPI.then(response => response.json().then(data => {
-      console.log(data);
-      window.location.replace("/admin");
+      console.log(data.message);
+      let msg = data.message
+      if(msg == "Register successful" || msg == "Login successful")
+      {
+        callback(msg);
+        window.location.replace("/admin");
+      }
+      else
+        alert('Company does not exist!')
     }))
   }
 
   const classes = useStyles();
 
-  const callback = () => {
-    alert(`User logged in!
+  const callback = (message) => {
+    alert(`${message}
            Tenant: ${tenant}
            Organization: ${organization}
            Company: ${company}
