@@ -129,9 +129,8 @@ export default function Sidebar(props) {
             }
             
             localStorage.setItem('brands', JSON.stringify(localStored));
+            window.location.reload(false);
           }))
-
-          //window.location.reload(false);
         }))
         .catch(error => {
           console.log(error);
