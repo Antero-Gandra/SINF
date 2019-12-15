@@ -43,7 +43,7 @@ export default function Sidebar(props) {
             stage:data[i].stage, 
             price:data[i].total,
             supplierOrCustomer:data[i].company_name,
-            items:"UNKOWN"
+            items:data[i].count
           });
         }
 
@@ -88,9 +88,9 @@ export default function Sidebar(props) {
           localStored.push({
             orderId:"ORD-" + data[i].order_id, 
             stage:data[i].stage, 
-            purchaseOrderName:data[i].purchase_order_uuid,
+            price:data[i].total,
             supplierOrCustomer:data[i].company_name,
-            items:"UNKOWN"
+            items:data[i].count
           });
         }
 

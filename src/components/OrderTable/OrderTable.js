@@ -78,7 +78,7 @@ export default function OrderTable() {
               <TableCell align="center">Customer</TableCell>
             }
 
-            <TableCell align="center">Items</TableCell>
+            <TableCell align="center">Number of Items</TableCell>
 
             {localStorage.getItem('userType') === "Customer" &&
               <TableCell align="center">Purchase Invoice</TableCell>
