@@ -54,6 +54,7 @@ export default function AuthBox() {
       if(msg === "Register successful" || msg === "Login successful")
       {
         callback(msg);
+        localStorage.setItem('userId', data.id);
         window.location.replace("/admin");
       }
       else

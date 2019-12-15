@@ -76,6 +76,16 @@ export function fetchSubscriptionsSupplier(tenant, organization, company){
     });
 }
 
+export function getBrands(supplierId){
+    return fetch(apiHost + "/brands/get/all/supplier/" + supplierId, {
+        method: 'GET',
+        headers: { 
+            'Content-Type': 'application/json;charset=utf-8',
+            'Access-Control-Allow-Origin': '*' 
+        } 
+    });
+}
+
 export function login(tenant, organization, company, userType){
     if(userType === "Customer"){
         return fetch(apiHost + "/user/customer/add", {

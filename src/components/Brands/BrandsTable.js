@@ -28,19 +28,17 @@ export default function BrandsTable() {
   const [key, setKey] = useState('');
 
   const getBrands = () => {
-    /*if(localStorage.getItem('userOrders') !== null){
-      let localStoredOrders = JSON.stringify(localStorage.getItem('userOrders'));
+    
+    if(localStorage.getItem('brands') !== null){
+      let localStoredBrands = JSON.stringify(localStorage.getItem('brands'));
 
-      if(localStoredOrders !== null){
-        let JSONparsed = JSON.parse(JSON.parse(localStoredOrders || '') || '');
+      if(localStoredBrands !== null){
+        let JSONparsed = JSON.parse(JSON.parse(localStoredBrands || '') || '');
         return JSONparsed;
       }
-    }*/
+    }
 
-    return [{brandId:"BRND-1", brandName:"EXEMPLO", numberOfSalesItems:"2", numberOfSubscriptions:"3"},
-    {brandId:"BRND-1", brandName:"EXEMPLO", numberOfSalesItems:"2", numberOfSubscriptions:"3"}, 
-    {brandId:"BRND-1", brandName:"EXEMPLO", numberOfSalesItems:"2", numberOfSubscriptions:"3"},
-    {brandId:"BRND-1", brandName:"EXEMPLO", numberOfSalesItems:"2", numberOfSubscriptions:"3"}];
+    return '';
   }
 
   useEffect(() => {

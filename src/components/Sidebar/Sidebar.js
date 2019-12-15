@@ -15,7 +15,7 @@ import Button from '@material-ui/core/Button';
 import Container from '@material-ui/core/Container';
 // core components
 import AdminNavbarLinks from "components/Navbars/AdminNavbarLinks.js";
-import {syncronizeCustomer, syncronizeSupplier, fetchSubscriptionsCustomer, fetchSubscriptionsSupplier} from "../../requests/requests.js";
+import {syncronizeCustomer, syncronizeSupplier, fetchSubscriptionsCustomer, fetchSubscriptionsSupplier, getBrands} from "../../requests/requests.js";
 
 import styles from "assets/jss/material-dashboard-react/components/sidebarStyle.js";
 
@@ -112,7 +112,26 @@ export default function Sidebar(props) {
           }
           
           localStorage.setItem('userSubscriptions', JSON.stringify(localStored));
-          window.location.reload(false);
+          
+          getBrands(localStorage.getItem('userId'))
+          .then(response => response.json().then(data => {
+            console.log(data);
+
+            let localStored = [];
+
+            for(let i = 0; i < data.length; i++){
+              localStored.push({
+                brandId:"BRND-" + data[i].brand_id, 
+                brandName:data[i].brand_name, 
+                numberOfSalesItems: data[i].count,
+                numberOfSubscriptions:"1",
+              });
+            }
+            
+            localStorage.setItem('brands', JSON.stringify(localStored));
+          }))
+
+          //window.location.reload(false);
         }))
         .catch(error => {
           console.log(error);
