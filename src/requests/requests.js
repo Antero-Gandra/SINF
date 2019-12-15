@@ -10,6 +10,19 @@ export function getToken(){
     });
 }
 
+export function generateSalesOrderRequest (orderId){
+    return fetch(apiHost + "/dev/orders/generate", {
+        method: 'POST',
+        headers: { 
+            'Content-Type': 'application/json;charset=utf-8',
+            'Access-Control-Allow-Origin': '*' 
+        },
+        body: JSON.stringify({
+            "orderId": orderId,
+        })
+    });
+}
+
 export function syncronizeCustomer(tenant, organization){
     return fetch(apiHost + "/dev/sync/customer?" + "tenant=" + tenant + "&organization=" + organization, {
         method: 'GET',

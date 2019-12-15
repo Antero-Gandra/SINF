@@ -11,6 +11,7 @@ import TableHead from '@material-ui/core/TableHead';
 import IconButton from "@material-ui/core/IconButton";
 import Close from "@material-ui/icons/Close";
 import Button from '@material-ui/core/Button';
+import { generateSalesOrderRequest } from "../../requests/requests.js";
 
 const useStyles = makeStyles(styles);
 
@@ -24,7 +25,11 @@ export default function OrderTable() {
   const [rows, setRows] = useState('');
 
   const generateSalesOrder = (orderId) => {
-    console.log("generate sometjing for: " + orderId);
+    let generateSalesOrderPromise = generateSalesOrderRequest(orderId);
+
+    generateSalesOrderPromise.then(response => response.json().then(data => {
+      console.log(data.message);
+    }))
   }
 
   const rejectOrder = (orderId) => {
@@ -121,7 +126,7 @@ export default function OrderTable() {
 
               {localStorage.getItem('userType') === "Supplier" && 
                 <TableCell align="center">
-                  <Button onClick={() => { generateSalesOrder(row.orderId) }} style={{ margin: "2em" }} variant="contained" color="primary">
+                  <Button onClick={() => { generateSalesOrder(row.purchaseOrderName) }} style={{ margin: "2em" }} variant="contained" color="primary">
                     Generate Sales Order
                   </Button>
                 </TableCell>

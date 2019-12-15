@@ -51,7 +51,7 @@ export default function AuthBox() {
     loginAPI.then(response => response.json().then(data => {
       console.log(data.message);
       let msg = data.message
-      if(msg == "Register successful" || msg == "Login successful")
+      if(msg === "Register successful" || msg === "Login successful")
       {
         callback(msg);
         window.location.replace("/admin");
