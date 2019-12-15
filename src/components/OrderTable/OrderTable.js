@@ -68,7 +68,7 @@ export default function OrderTable() {
           <TableRow>
             <TableCell align="center">Order-ID</TableCell>
             <TableCell align="center">Stage</TableCell>
-            <TableCell align="center">Purchase Order Name</TableCell>
+            <TableCell align="center">Total Price</TableCell>
 
             {localStorage.getItem('userType') === "Customer" &&
               <TableCell align="center">Supplier</TableCell>
@@ -100,7 +100,7 @@ export default function OrderTable() {
                 {row.orderId}
               </TableCell>
               <TableCell align="center">{row.stage}</TableCell>
-              <TableCell align="center">{row.purchaseOrderName}</TableCell>
+              <TableCell align="center">{row.price}</TableCell>
               <TableCell align="center">{row.supplierOrCustomer}</TableCell>
               <TableCell align="center">{row.items}</TableCell>
 
