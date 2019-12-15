@@ -84,11 +84,11 @@ export default function OrderTable() {
               <TableCell align="center">Purchase Invoice</TableCell>
             }
 
-            {localStorage.getItem('userType') === "Supplier" &&
+            {localStorage.getItem('userType') === "Supplier" && 
               <TableCell align="center">Reject</TableCell>
             }
 
-            {localStorage.getItem('userType') === "Supplier" &&
+            {localStorage.getItem('userType') === "Supplier" && 
               <TableCell align="center">Sales Order</TableCell>
             }
           </TableRow>
@@ -120,7 +120,12 @@ export default function OrderTable() {
                 </TableCell>
               }
 
-              {localStorage.getItem('userType') === "Supplier" &&
+              {localStorage.getItem('userType') === "Supplier" && row.stage !== "PURCHASE_ORDER" &&
+                <TableCell align="center">
+                </TableCell>
+              }
+
+              {localStorage.getItem('userType') === "Supplier" && row.stage === "PURCHASE_ORDER" &&
                 <TableCell align="center">
                   <IconButton onClick={() => rejectOrder(row.orderId)} aria-label="Close" className={classes.tableActionButton}>
                     <Close className={classes.tableActionButtonIcon + " " + classes.close}/>
@@ -128,7 +133,15 @@ export default function OrderTable() {
                 </TableCell>
               }
 
-              {localStorage.getItem('userType') === "Supplier" && 
+              {localStorage.getItem('userType') === "Supplier" && row.stage !== "PURCHASE_ORDER" &&
+                <TableCell align="center">
+                  <Button style={{ margin: "2em" }} variant="contained" color="primary" disabled>
+                    Generate Sales Order
+                  </Button>
+                </TableCell>
+              }
+
+              {localStorage.getItem('userType') === "Supplier" && row.stage === "PURCHASE_ORDER" &&
                 <TableCell align="center">
                   <Button onClick={() => { generateSalesOrder(row.purchaseOrderName) }} style={{ margin: "2em" }} variant="contained" color="primary">
                     Generate Sales Order
