@@ -24,7 +24,7 @@ const dashboardRoutes = [
   },
   {
     path: "/available_brands",
-    name: "Available Brands",
+    name: "Brands",
     icon: ListIcon,
     component: AvailableBrands,
     layout: "/admin"

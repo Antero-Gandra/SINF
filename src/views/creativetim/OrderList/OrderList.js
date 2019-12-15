@@ -50,7 +50,7 @@ export default function TableList() {
           <CardHeader color="primary">
             <h4 className={classes.cardTitleWhite}>List of Orders</h4>
             <p className={classes.cardCategoryWhite}>
-              See the orders saved on the server, use filters for better navigation
+              See the orders saved on the server
             </p>
           </CardHeader>
           <CardBody>

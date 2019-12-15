@@ -58,7 +58,7 @@ export default function SubscriptionBox() {
     <Table>
       <TableHead>
         <TableRow>
-          <TableCell align="center">Subscription id</TableCell>
+          <TableCell align="center">Subscription-ID</TableCell>
           <TableCell align="center">Brand name</TableCell>
 
           {localStorage.getItem('userType') === "Customer" &&

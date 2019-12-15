@@ -177,13 +177,13 @@ export default function Sidebar(props) {
       <Container style={{ alignItems: 'center' }}>
         {localStorage.getItem('userType') === "Customer" && 
           <Button onClick={() => { doSyncCustomer() }} style={{ margin: "2em" }} variant="contained" color="primary">
-            Sync Customer
+            Sync
           </Button>
         }
 
         {localStorage.getItem('userType') === "Supplier" && 
           <Button onClick={() => { doSyncSupplier() }} style={{ margin: "2em" }} variant="contained" color="primary">
-            Sync Supplier
+            Sync
           </Button>
         }
 

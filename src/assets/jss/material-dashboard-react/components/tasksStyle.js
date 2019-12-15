@@ -3,6 +3,7 @@ import {
   primaryColor,
   dangerColor,
   successColor,
+  techSINFblueColor,
   grayColor
 } from "assets/jss/material-dashboard-react.js";
 import tooltipStyle from "assets/jss/material-dashboard-react/tooltipStyle.js";
@@ -57,6 +58,11 @@ const tasksStyle = {
   check: {
     backgroundColor: "transparent",
     color: successColor[0],
+    boxShadow: "none"
+  },
+  copy: {
+    backgroundColor: "transparent",
+    color: techSINFblueColor[1],
     boxShadow: "none"
   }
 };
