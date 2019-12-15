@@ -11,7 +11,20 @@ export function getToken(){
 }
 
 export function generateSalesOrderRequest (orderId){
-    return fetch(apiHost + "/dev/orders/generate", {
+    return fetch(apiHost + "/dev/order/generate", {
+        method: 'POST',
+        headers: { 
+            'Content-Type': 'application/json;charset=utf-8',
+            'Access-Control-Allow-Origin': '*' 
+        },
+        body: JSON.stringify({
+            "orderId": orderId,
+        })
+    });
+}
+
+export function generatePurchaseInvoiceRequest (orderId){
+    return fetch(apiHost + "/dev/invoice/generate", {
         method: 'POST',
         headers: { 
             'Content-Type': 'application/json;charset=utf-8',
@@ -24,7 +37,7 @@ export function generateSalesOrderRequest (orderId){
 }
 
 export function syncronizeCustomer(tenant, organization){
-    return fetch(apiHost + "/dev/sync/customer?" + "tenant=" + tenant + "&organization=" + organization, {
+    return fetch(apiHost + "/sync/customer?" + "tenant=" + tenant + "&organization=" + organization, {
         method: 'GET',
         headers: { 
             'Content-Type': 'application/json;charset=utf-8',
@@ -34,7 +47,7 @@ export function syncronizeCustomer(tenant, organization){
 }
 
 export function syncronizeSupplier(tenant, organization){
-    return fetch(apiHost + "/dev/sync/supplier?" + "tenant=" + tenant + "&organization=" + organization, {
+    return fetch(apiHost + "/sync/supplier?" + "tenant=" + tenant + "&organization=" + organization, {
         method: 'GET',
         headers: { 
             'Content-Type': 'application/json;charset=utf-8',

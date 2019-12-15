@@ -11,7 +11,7 @@ import TableHead from '@material-ui/core/TableHead';
 import IconButton from "@material-ui/core/IconButton";
 import Close from "@material-ui/icons/Close";
 import Button from '@material-ui/core/Button';
-import { generateSalesOrderRequest } from "../../requests/requests.js";
+import { generateSalesOrderRequest, generatePurchaseInvoiceRequest } from "../../requests/requests.js";
 
 const useStyles = makeStyles(styles);
 
@@ -36,8 +36,12 @@ export default function OrderTable() {
     console.log("reject for order: " + orderId);
   }
 
-  const generateSalesInvoice = (orderId) => {
-    console.log("generate sales invoice for order: " + orderId);
+  const generatePurchaseInvoice = (orderId) => {
+    let generatePurchaseInvoicePromise = generatePurchaseInvoiceRequest(orderId);
+
+    generatePurchaseInvoicePromise.then(response => response.json().then(data => {
+      console.log(data.message);
+    }))
   }
 
   const getOrders = () => {
@@ -110,7 +114,7 @@ export default function OrderTable() {
 
               {localStorage.getItem('userType') === "Customer" && row.stage === "SALES_INVOICE" &&
                 <TableCell align="center">
-                  <Button onClick={() => { generateSalesInvoice(row.orderId) }} style={{ margin: "2em" }} variant="contained" color="primary">
+                  <Button onClick={() => { generatePurchaseInvoice(row.purchaseOrderName) }} style={{ margin: "2em" }} variant="contained" color="primary">
                     Generate Purchase Invoice
                   </Button>
                 </TableCell>
