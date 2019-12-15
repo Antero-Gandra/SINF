@@ -63,6 +63,16 @@ export function fetchSubscriptionsSupplier(tenant, organization, company){
     });
 }
 
+export function unsubscribeBackend(subscriptionId){
+    return fetch(apiHost + "/subscriptions/delete/" + subscriptionId, {
+        method: 'DELETE',
+        headers: { 
+            'Content-Type': 'application/json;charset=utf-8',
+            'Access-Control-Allow-Origin': '*' 
+        } 
+    });
+}
+
 export function login(tenant, organization, company, userType){
     if(userType === "Customer"){
         return fetch(apiHost + "/user/customer/add", {
