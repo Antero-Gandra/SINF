@@ -11,7 +11,7 @@ export function getToken(){
 }
 
 export function generateSalesOrderRequest (orderId){
-    return fetch(apiHost + "/dev/order/generate", {
+    return fetch(apiHost + "/generate/salesOrder", {
         method: 'POST',
         headers: { 
             'Content-Type': 'application/json;charset=utf-8',
@@ -24,7 +24,7 @@ export function generateSalesOrderRequest (orderId){
 }
 
 export function generatePurchaseInvoiceRequest (orderId){
-    return fetch(apiHost + "/dev/invoice/generate", {
+    return fetch(apiHost + "/generate/purchaseInvoice", {
         method: 'POST',
         headers: { 
             'Content-Type': 'application/json;charset=utf-8',
