@@ -10,6 +10,7 @@ import styles from "assets/jss/material-dashboard-react/components/tasksStyle.js
 import TableHead from '@material-ui/core/TableHead';
 import IconButton from "@material-ui/core/IconButton";
 import Close from "@material-ui/icons/Close";
+import { unsubscribeBackend } from "../../requests/requests.js";
 
 const useStyles = makeStyles(styles);
 
@@ -39,19 +40,25 @@ export default function SubscriptionBox() {
     setRows(localStoredSubscriptions);    
   }, []);
 
-  const unsubscribeFrontEnd = (supplier) => {
-    setRows(rows.filter(item => item.subscriptionId !== supplier));
-    let removeIndex = rows.map(function(item) { return item.subscriptionId; }).indexOf(supplier);
+  const unsubscribeFrontEnd = (subscription) => {
+    setRows(rows.filter(item => item.subscriptionId !== subscription));
+    let removeIndex = rows.map(function(item) { return item.subscriptionId; }).indexOf(subscription);
     rows.splice(removeIndex, 1);
   }
 
-  const unsubscribeBackEnd = (supplier) => {
-    // DELETE API call to unsubscribe
+  const unsubscribeBackEnd = (subscription) => {
+
+    let splitString = subscription.split("SUB-");
+    let intSplitString = parseInt(splitString[1]);
+
+    unsubscribeBackend(intSplitString).then(response => response.json().then(data => {
+      console.log(data);
+    }))
   }
 
-  const unsubscribe = (supplier) => {
-    unsubscribeFrontEnd(supplier);
-    unsubscribeBackEnd(supplier);
+  const unsubscribe = (subscription) => {
+    unsubscribeFrontEnd(subscription);
+    unsubscribeBackEnd(subscription);
   }
 
   return (
