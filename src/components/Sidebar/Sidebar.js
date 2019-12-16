@@ -39,7 +39,7 @@ export default function Sidebar(props) {
 
         for(let i = 0; i < data.length; i++){
           localStored.push({
-            orderId:"ORD-" + data[i].order_id, 
+            orderId: data[i].order_id, 
             stage:data[i].stage, 
             price:data[i].total,
             supplierOrCustomer:data[i].company_name,
@@ -51,7 +51,7 @@ export default function Sidebar(props) {
 
         fetchSubscriptionsCustomer(localStorage.getItem('tenant'), localStorage.getItem('organization'), localStorage.getItem('key'))
           .then(response => response.json().then(data => {
-            console.log(data);
+            console.log(data); 
 
             let localStored = [];
 
@@ -86,7 +86,7 @@ export default function Sidebar(props) {
 
         for(let i = 0; i < data.length; i++){
           localStored.push({
-            orderId:"ORD-" + data[i].order_id, 
+            orderId: data[i].order_id, 
             stage:data[i].stage, 
             price:data[i].total,
             supplierOrCustomer:data[i].company_name,
