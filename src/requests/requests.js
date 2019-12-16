@@ -39,6 +39,23 @@ export function generateKeyRequest (brandId){
     });
 }
 
+export function subscribeRequest (tenant, organization, company, secretKey){
+    return fetch(apiHost + "/brands/subscribe", {
+        method: 'POST',
+        headers: { 
+            'Content-Type': 'application/json;charset=utf-8',
+            'Access-Control-Allow-Origin': '*' 
+        },
+        body: JSON.stringify({
+            "tenant": tenant,
+            "organization": organization,
+            "company": company,
+            "secretKey": secretKey
+        })
+    });
+}
+
+
 export function syncronizeCustomer(tenant, organization){
     return fetch(apiHost + "/sync/customer?" + "tenant=" + tenant + "&organization=" + organization, {
         method: 'GET',

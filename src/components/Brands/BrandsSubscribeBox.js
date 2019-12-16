@@ -9,7 +9,7 @@ import TableCell from "@material-ui/core/TableCell";
 import styles from "assets/jss/material-dashboard-react/components/tasksStyle.js";
 import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
-//import {  } from "../../requests/requests.js";
+import { subscribeRequest } from "../../requests/requests.js";
 
 const useStyles = makeStyles(styles);
 
@@ -33,6 +33,11 @@ export default function BrandsSubscribeBox() {
     );
   }
 
+  const subscribe = () =>
+  {
+    subscribeRequest (localStorage.getItem('tenant'), localStorage.getItem('organization'),  localStorage.getItem('key'), subscribeKey);
+ }
+
   return (
     <form onSubmit={handleSubmit}>
       <Table className={classes.table}>
@@ -43,6 +48,7 @@ export default function BrandsSubscribeBox() {
                     multiline 
                     rows="5" 
                     required 
+                    id="subscribeKey"
                     value={subscribeKey} 
                     onChange={e => setKey(e.target.value)} 
                     fullwidth={true}
@@ -54,7 +60,7 @@ export default function BrandsSubscribeBox() {
 
             <TableRow key={2}>
                 <TableCell> 
-                  <Button type="submit" variant="contained">Submit</Button>
+                  <Button onClick={() => { subscribe() }} type="submit" variant="contained">Submit</Button>
                 </TableCell>
             </TableRow>
         </TableBody>
