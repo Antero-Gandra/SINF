@@ -35,7 +35,7 @@ const switchRoutes = (
       }
       return null;
     })}
-    <Redirect from="/admin" to="/admin/dashboard" />
+    <Redirect from="/admin" to="/admin/order_list" />
   </Switch>
 );
 
@@ -92,17 +92,12 @@ export default function Admin({ ...rest }) {
         color={"blue"}
         {...rest}
       />
+
       <div className={classes.mainPanel} ref={mainPanel}>
-        <Navbar
-          routes={routes}
-          handleDrawerToggle={handleDrawerToggle}
-          {...rest}
-        />
         {/* On the /maps route we want the map to be on full screen - this is not possible if the content and conatiner classes are present because they have some paddings which would make the map smaller */}
         <div className={classes.content}>
           <div className={classes.container}>{switchRoutes}</div>
         </div>
-        <Footer />
       </div>
     </div>
   );

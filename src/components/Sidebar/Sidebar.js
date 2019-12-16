@@ -11,8 +11,11 @@ import List from "@material-ui/core/List";
 import ListItem from "@material-ui/core/ListItem";
 import ListItemText from "@material-ui/core/ListItemText";
 import Icon from "@material-ui/core/Icon";
+import Button from '@material-ui/core/Button';
+import Container from '@material-ui/core/Container';
 // core components
 import AdminNavbarLinks from "components/Navbars/AdminNavbarLinks.js";
+import {syncronizeCustomer, syncronizeSupplier, fetchSubscriptionsCustomer, fetchSubscriptionsSupplier, getBrands} from "../../requests/requests.js";
 
 import styles from "assets/jss/material-dashboard-react/components/sidebarStyle.js";
 
@@ -24,6 +27,125 @@ export default function Sidebar(props) {
   function activeRoute(routeName) {
     return window.location.href.indexOf(routeName) > -1 ? true : false;
   }
+
+  const doSyncCustomer = () => {
+    let sync = syncronizeCustomer(localStorage.getItem('tenant'), localStorage.getItem('organization'));
+
+    sync
+      .then(response => response.json().then(data => {
+        console.log(data);
+
+        let localStored = [];
+
+        for(let i = 0; i < data.length; i++){
+          localStored.push({
+            orderId:"ORD-" + data[i].order_id, 
+            stage:data[i].stage, 
+            price:data[i].total,
+            supplierOrCustomer:data[i].company_name,
+            items:data[i].count
+          });
+        }
+
+        localStorage.setItem('userOrders', JSON.stringify(localStored)); 
+
+        fetchSubscriptionsCustomer(localStorage.getItem('tenant'), localStorage.getItem('organization'), localStorage.getItem('key'))
+          .then(response => response.json().then(data => {
+            console.log(data);
+
+            let localStored = [];
+
+            for(let i = 0; i < data.length; i++){
+              localStored.push({
+                subscriptionId:"SUB-" + data[i].subscription_id, 
+                brandName:data[i].brand_name, 
+                customerOrSupplier:data[i].company_name,
+                createdAt:data[i].subscription_createdat              
+              });
+            }
+            
+            localStorage.setItem('userSubscriptions', JSON.stringify(localStored));
+            window.location.reload(false);
+          }))
+          .catch(error => {
+            console.log(error);
+          })
+      }))
+      .catch(error => {
+        console.log(error);
+      });
+  }
+
+  const doSyncSupplier = () => {
+    let sync = syncronizeSupplier(localStorage.getItem('tenant'), localStorage.getItem('organization'));
+
+    sync
+      .then(response => response.json().then(data => {
+        console.log(data);
+        let localStored = [];
+
+        for(let i = 0; i < data.length; i++){
+          localStored.push({
+            orderId:"ORD-" + data[i].order_id, 
+            stage:data[i].stage, 
+            price:data[i].total,
+            supplierOrCustomer:data[i].company_name,
+            items:data[i].count
+          });
+        }
+
+        localStorage.setItem('userOrders', JSON.stringify(localStored)); 
+
+        fetchSubscriptionsSupplier(localStorage.getItem('tenant'), localStorage.getItem('organization'), localStorage.getItem('key'))
+        .then(response => response.json().then(data => {
+          console.log(data);
+
+          let localStored = [];
+
+          for(let i = 0; i < data.length; i++){
+            localStored.push({
+              subscriptionId:"SUB-" + data[i].subscription_id, 
+              brandName:data[i].brand_name, 
+              customerOrSupplier:data[i].company_name,
+              createdAt:data[i].subscription_createdat              
+            });
+          }
+          
+          localStorage.setItem('userSubscriptions', JSON.stringify(localStored));
+          
+          getBrands(localStorage.getItem('userId'))
+          .then(response => response.json().then(data => {
+            console.log(data);
+
+            let localStored = [];
+
+            for(let i = 0; i < data.length; i++){
+              localStored.push({
+                brandId:"BRND-" + data[i].brand_id, 
+                brandName:data[i].brand_name, 
+                numberOfSalesItems: data[i].count,
+                numberOfSubscriptions:"1",
+              });
+            }
+            
+            localStorage.setItem('brands', JSON.stringify(localStored));
+            window.location.reload(false);
+          }))
+        }))
+        .catch(error => {
+          console.log(error);
+        })
+      }))
+      .catch(error => {
+        alert(error);
+      });
+  }
+
+  const logout = () => {
+    localStorage.clear();
+    window.location.replace("/auth");
+  }
+
   const { color, logo, image, logoText, routes } = props;
   var links = (
     <List className={classes.list}>
@@ -70,7 +192,25 @@ export default function Sidebar(props) {
           </NavLink>
         );
       })}
+      <Container style={{ alignItems: 'left' }}>
+        {localStorage.getItem('userType') === "Customer" && 
+          <Button onClick={() => { doSyncCustomer() }} style={{ margin: "10px 10px 10px 0" }} variant="contained" color="primary">
+            Sync
+          </Button>
+        }
+
+        {localStorage.getItem('userType') === "Supplier" && 
+          <Button onClick={() => { doSyncSupplier() }} style={{ margin: "10px 10px 10px 0" }} variant="contained" color="primary">
+            Sync
+          </Button>
+        }
+
+        <Button onClick={() => { logout() }} style={{ margin: "10px 10px 10px 0" }} variant="contained" color="primary">
+          Logout
+        </Button>
+      </Container>
     </List>
+
   );
   var brand = logoText.length > 0 ? (
     <div className={classes.logo}>

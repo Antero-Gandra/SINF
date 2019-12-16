@@ -4,10 +4,11 @@ import { makeStyles } from "@material-ui/core/styles";
 // core components
 import GridItem from "components/Grid/GridItem.js";
 import GridContainer from "components/Grid/GridContainer.js";
-import Table from "components/Table/Table.js";
 import Card from "components/Card/Card.js";
 import CardHeader from "components/Card/CardHeader.js";
 import CardBody from "components/Card/CardBody.js";
+import BrandsTable from "components/Brands/BrandsTable.js";
+import BrandsSubscribeBox from "components/Brands/BrandsSubscribeBox.js";
 
 const styles = {
   cardCategoryWhite: {
@@ -41,28 +42,38 @@ const styles = {
 
 const useStyles = makeStyles(styles);
 
-export default function TableList() {
+export default function AvailableBrands() {
   const classes = useStyles();
   return (
     <GridContainer>
       <GridItem xs={12} sm={12} md={12}>
         <Card>
-          <CardHeader color="primary">
-            <h4 className={classes.cardTitleWhite}> Create Catalog </h4>
-          </CardHeader>
+          {localStorage.getItem('userType') === "Customer" &&
+            <CardHeader color="primary">
+              <h4 className={classes.cardTitleWhite}>Subscribe to a Brand</h4>
+              <p className={classes.cardCategoryWhite}>
+                As a customer, use your key here to subscribe to a brand
+              </p>
+            </CardHeader>
+          }
+
+          {localStorage.getItem('userType') === "Supplier" &&
+            <CardHeader color="primary">
+              <h4 className={classes.cardTitleWhite}>List of Available Brands</h4>
+              <p className={classes.cardCategoryWhite}>
+                As a supplier, see all brands that are available
+              </p>
+            </CardHeader>
+          }
+
           <CardBody>
-            <Table
-              tableHeaderColor="primary"
-              tableHead={["Product ID", "Name", "Date", "Add to Catalog"]}
-              tableData={[
-                ["Dakota Rice", "Niger", "Oud-Turnhout", "$36,738"],
-                ["Minerva Hooper", "Curaçao", "Sinaai-Waas", "$23,789"],
-                ["Sage Rodriguez", "Netherlands", "Baileux", "$56,142"],
-                ["Philip Chaney", "Korea, South", "Overland Park", "$38,735"],
-                ["Doris Greene", "Malawi", "Feldkirchen in Kärnten", "$63,542"],
-                ["Mason Porter", "Chile", "Gloucester", "$78,615"]
-              ]}
-            />
+            {localStorage.getItem('userType') === "Supplier" &&
+              <BrandsTable />
+            }
+
+            {localStorage.getItem('userType') === "Customer" &&
+              <BrandsSubscribeBox />
+            }
           </CardBody>
         </Card>
       </GridItem>
