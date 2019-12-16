@@ -113,7 +113,7 @@ export default function Sidebar(props) {
           
           localStorage.setItem('userSubscriptions', JSON.stringify(localStored));
           
-          getBrands(localStorage.getItem('userId'))
+          getBrands(localStorage.getItem('userId'), localStorage.getItem('tenant'), localStorage.getItem('organization'))
           .then(response => response.json().then(data => {
             console.log(data);
 
@@ -130,7 +130,7 @@ export default function Sidebar(props) {
             }
             
             localStorage.setItem('brands', JSON.stringify(localStored));
-            window.location.reload(false);
+           // window.location.reload(false);
           }))
         }))
         .catch(error => {

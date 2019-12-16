@@ -96,8 +96,8 @@ export function fetchSubscriptionsSupplier(tenant, organization, company){
     });
 }
 
-export function getBrands(supplierId){
-    return fetch(apiHost + "/brands/get/all/supplier/" + supplierId, {
+export function getBrands(supplierId, tenant, organization){
+    return fetch(apiHost + "/brands/get/all/supplier/" + supplierId + "?tenant=" + tenant + "&organization=" + organization, {
         method: 'GET',
         headers: { 
             'Content-Type': 'application/json;charset=utf-8',
