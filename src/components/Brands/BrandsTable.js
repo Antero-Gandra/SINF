@@ -13,7 +13,7 @@ import Button from '@material-ui/core/Button';
 import TextField from '@material-ui/core/TextField';
 import {CopyToClipboard} from 'react-copy-to-clipboard';
 import FileCopyIcon from '@material-ui/icons/FileCopy';
-//import {  } from "../../requests/requests.js";
+import { generateKeyRequest} from "../../requests/requests.js";
 
 const useStyles = makeStyles(styles);
 
@@ -41,9 +41,23 @@ export default function BrandsTable() {
     return '';
   }
 
+
+  const generateKey = async (brandId) => {
+    let generateKeyInvoicePromise = generateKeyRequest (brandId);
+
+    let array = rows;
+
+    await generateKeyInvoicePromise.then(response => response.json().then(data => 
+      {
+        array[brandId - 1].key = data.secret_key;
+        setRows(array);
+        setKey(data.secret_key);
+      }))
+  }
+
   useEffect(() => {
     let localStoredBrands = getBrands();
-    setRows(localStoredBrands);    
+    setRows(localStoredBrands);
   }, []);
 
   return (
@@ -59,21 +73,21 @@ export default function BrandsTable() {
       </TableHead>
       <TableBody>
         { rows !== '' && rows.map(row => (
-          <TableRow key={row.brandId}>
+          <TableRow id={"table-row-" + row.brandId}  key={row.brandId}>
             <TableCell align="center" component="th" scope="row">
-              {row.brandId}
+              BRND-{row.brandId}
             </TableCell>
             <TableCell align="center">{row.brandName}</TableCell>
             <TableCell align="center">{row.numberOfSalesItems}</TableCell>
             <TableCell align="center">{row.numberOfSubscriptions}</TableCell>
             <TableCell align="center">
-              <Button style={{ margin: "2em" }} variant="contained" color="primary">
+              <Button onClick={() => { generateKey(row.brandId) }} style={{ margin: "2em" }} variant="contained" color="primary">
                 Generate Key
               </Button>
               <TextField
                 id="standard-read-only-input"
-                value={key}
-                onChange={e => setKey(e.target.value)}
+                value={row.key}
+                onChange={e => setRows(e.target.value)}
                 label="Your Key"
                 className={classes.textField}
                 margin="normal"
@@ -81,7 +95,7 @@ export default function BrandsTable() {
                   readOnly: true,
                 }}
               />
-              <CopyToClipboard text={key} onCopy={() => alert("Copied your key!")}>
+              <CopyToClipboard text={row.key} onCopy={() => alert("Copied your key!")}>
                 <IconButton aria-label="Copy" className={classes.tableActionButton}>
                   <FileCopyIcon className={classes.copy}/>
                 </IconButton>

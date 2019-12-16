@@ -121,10 +121,11 @@ export default function Sidebar(props) {
 
             for(let i = 0; i < data.length; i++){
               localStored.push({
-                brandId:"BRND-" + data[i].brand_id, 
+                brandId: data[i].brand_id, 
                 brandName:data[i].brand_name, 
                 numberOfSalesItems: data[i].count,
                 numberOfSubscriptions:"1",
+                key:''
               });
             }
             

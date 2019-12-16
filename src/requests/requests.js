@@ -1,15 +1,5 @@
 const apiHost = 'http://localhost:9000';
 
-export function getToken(){
-    return fetch(apiHost + "/dev/token", {
-        method: 'GET',
-        headers: { 
-                'Content-Type': 'application/json;charset=utf-8',
-                'Access-Control-Allow-Origin': '*' 
-        }
-    });
-}
-
 export function generateSalesOrderRequest (orderId){
     return fetch(apiHost + "/generate/salesOrder", {
         method: 'POST',
@@ -32,6 +22,19 @@ export function generatePurchaseInvoiceRequest (orderId){
         },
         body: JSON.stringify({
             "orderId": orderId,
+        })
+    });
+}
+
+export function generateKeyRequest (brandId){
+    return fetch(apiHost + "/generate/key", {
+        method: 'POST',
+        headers: { 
+            'Content-Type': 'application/json;charset=utf-8',
+            'Access-Control-Allow-Origin': '*' 
+        },
+        body: JSON.stringify({
+            "brandId": brandId,
         })
     });
 }
