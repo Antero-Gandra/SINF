@@ -192,20 +192,20 @@ export default function Sidebar(props) {
           </NavLink>
         );
       })}
-      <Container style={{ alignItems: 'center' }}>
+      <Container style={{ alignItems: 'left' }}>
         {localStorage.getItem('userType') === "Customer" && 
-          <Button onClick={() => { doSyncCustomer() }} style={{ margin: "2em" }} variant="contained" color="primary">
+          <Button onClick={() => { doSyncCustomer() }} style={{ margin: "10px 10px 10px 0" }} variant="contained" color="primary">
             Sync
           </Button>
         }
 
         {localStorage.getItem('userType') === "Supplier" && 
-          <Button onClick={() => { doSyncSupplier() }} style={{ margin: "2em" }} variant="contained" color="primary">
+          <Button onClick={() => { doSyncSupplier() }} style={{ margin: "10px 10px 10px 0" }} variant="contained" color="primary">
             Sync
           </Button>
         }
 
-        <Button onClick={() => { logout() }} style={{ margin: "2em" }} variant="contained" color="primary">
+        <Button onClick={() => { logout() }} style={{ margin: "10px 10px 10px 0" }} variant="contained" color="primary">
           Logout
         </Button>
       </Container>
