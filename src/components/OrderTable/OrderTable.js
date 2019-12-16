@@ -11,7 +11,7 @@ import TableHead from '@material-ui/core/TableHead';
 import IconButton from "@material-ui/core/IconButton";
 import Close from "@material-ui/icons/Close";
 import Button from '@material-ui/core/Button';
-import { generateSalesOrderRequest, generatePurchaseInvoiceRequest } from "../../requests/requests.js";
+import { generateSalesOrderRequest, generatePurchaseInvoiceRequest, rejectOrderRequest } from "../../requests/requests.js";
 
 const useStyles = makeStyles(styles);
 
@@ -33,7 +33,15 @@ export default function OrderTable() {
   }
 
   const rejectOrder = (orderId) => {
-    console.log("reject for order: " + orderId);
+
+    let splitId = orderId.split("ORD-");
+    let id = parseInt(splitId[1]);
+
+    let rejectOrderPromise = rejectOrderRequest(id);
+
+    rejectOrderPromise.then(response => response.json().then(data => {
+      console.log(data);
+    }))
   }
 
   const generatePurchaseInvoice = (orderId) => {

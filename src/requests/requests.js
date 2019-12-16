@@ -55,7 +55,6 @@ export function subscribeRequest (tenant, organization, company, secretKey){
     });
 }
 
-
 export function syncronizeCustomer(tenant, organization){
     return fetch(apiHost + "/sync/customer?" + "tenant=" + tenant + "&organization=" + organization, {
         method: 'GET',
@@ -65,6 +64,7 @@ export function syncronizeCustomer(tenant, organization){
         }
     });
 }
+
 
 export function syncronizeSupplier(tenant, organization){
     return fetch(apiHost + "/sync/supplier?" + "tenant=" + tenant + "&organization=" + organization, {
@@ -103,6 +103,16 @@ export function getBrands(supplierId){
             'Content-Type': 'application/json;charset=utf-8',
             'Access-Control-Allow-Origin': '*' 
         } 
+    });
+}
+
+export function rejectOrderRequest(orderId){
+    return fetch(apiHost + "/orders/reject/" + orderId, {
+        method: 'PUT',
+        headers: {
+            'Content-Type': 'application/json;charset=utf-8',
+            'Access-Control-Allow-Origin': '*' 
+        }
     });
 }
 
