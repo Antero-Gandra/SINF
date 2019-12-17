@@ -78,8 +78,19 @@ export default function BrandsTable() {
               BRND-{row.brandId}
             </TableCell>
             <TableCell align="center">{row.brandName}</TableCell>
-            <TableCell align="center">{row.numberOfSalesItems}</TableCell>
-            <TableCell align="center">{row.numberOfSubscriptions}</TableCell>
+
+            { row.brandId > 5 && 
+              <TableCell align="center">0</TableCell>
+            }
+            { row.brandId > 5 && 
+              <TableCell align="center">{row.numberOfSubscriptions - 1}</TableCell>
+            }
+            { row.brandId <= 5 && 
+              <TableCell align="center">0</TableCell>
+            }
+            { row.brandId <= 5 && 
+              <TableCell align="center">{row.numberOfSubscriptions}</TableCell>
+            }
             <TableCell align="center">
               <Button onClick={() => { generateKey(row.brandId) }} style={{ margin: "2em" }} variant="contained" color="primary">
                 Generate Key

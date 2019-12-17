@@ -9,6 +9,7 @@ import TableCell from "@material-ui/core/TableCell";
 import styles from "assets/jss/material-dashboard-react/components/tasksStyle.js";
 import TableHead from '@material-ui/core/TableHead';
 import IconButton from "@material-ui/core/IconButton";
+import TextField from '@material-ui/core/TextField';
 import Close from "@material-ui/icons/Close";
 import Button from '@material-ui/core/Button';
 import { generateSalesOrderRequest, generatePurchaseInvoiceRequest, rejectOrderRequest } from "../../requests/requests.js";
@@ -143,9 +144,7 @@ export default function OrderTable() {
 
               {localStorage.getItem('userType') === "Supplier" && row.stage !== "PURCHASE_ORDER" &&
                 <TableCell align="center">
-                  <Button style={{ margin: "2em" }} variant="contained" color="primary" disabled>
-                    Generate Sales Order
-                  </Button>
+                    To Associate this invoice with an order, write ORD-(id) in "Remarks" while creating the invoice
                 </TableCell>
               }
 
