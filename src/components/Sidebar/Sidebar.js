@@ -123,8 +123,8 @@ export default function Sidebar(props) {
               localStored.push({
                 brandId: data[i].brand_id, 
                 brandName:data[i].brand_name, 
-                numberOfSalesItems: data[i].count,
-                numberOfSubscriptions:"1",
+                numberOfSalesItems: data[i].n_products,
+                numberOfSubscriptions: data[i].n_subscriptions,
                 key:''
               });
             }
