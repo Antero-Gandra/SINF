@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useCallback } from "react";
 // @material-ui/core components
 import { makeStyles } from "@material-ui/core/styles";
 import Table from "@material-ui/core/Table";
@@ -24,6 +24,8 @@ export default function OrderTable() {
   // GET API call of subscribers
 
   const [rows, setRows] = useState('');
+  const [, updateState] = React.useState();
+  const forceUpdate = useCallback(() => updateState({}), [])
 
   const generateSalesOrder = (orderId) => {
     let generateSalesOrderPromise = generateSalesOrderRequest(orderId);
@@ -35,13 +37,29 @@ export default function OrderTable() {
 
   const rejectOrder = (orderId) => {
 
-    let splitId = orderId.split("ORD-");
-    let id = parseInt(splitId[1]);
+    let id = parseInt(orderId);
 
     let rejectOrderPromise = rejectOrderRequest(id);
 
     rejectOrderPromise.then(response => response.json().then(data => {
-      console.log(data);
+      alert("Rejected order!");
+
+      let pos = rows.map(function(row) { return row.orderId; }).indexOf(orderId);
+
+      let copyRows = rows;
+
+      copyRows[pos] = {
+        orderId: rows[pos].orderId, 
+        stage: "REJECTED", 
+        price: rows[pos].price,
+        supplierOrCustomer: rows[pos].supplierOrCustomer,
+        items: rows[pos].items
+      }
+
+      console.log(rows);
+
+      setRows(copyRows);
+      forceUpdate();
     }))
   }
 
@@ -142,17 +160,23 @@ export default function OrderTable() {
                 </TableCell>
               }
 
-              {localStorage.getItem('userType') === "Supplier" && row.stage !== "PURCHASE_ORDER" &&
+              {localStorage.getItem('userType') === "Supplier" && row.stage !== "PURCHASE_ORDER" && row.stage !== "REJECTED" &&
                 <TableCell align="center">
                     To Associate this invoice with an order, write ORD-(id) in "Remarks" while creating the invoice
                 </TableCell>
               }
 
-              {localStorage.getItem('userType') === "Supplier" && row.stage === "PURCHASE_ORDER" &&
+              {localStorage.getItem('userType') === "Supplier" && row.stage === "PURCHASE_ORDER" && row.stage !== "REJECTED" &&
                 <TableCell align="center">
                   <Button onClick={() => { generateSalesOrder(row.orderId) }} style={{ margin: "2em" }} variant="contained" color="primary">
                     Generate Sales Order
                   </Button>
+                </TableCell>
+              }
+
+              {localStorage.getItem('userType') === "Supplier" && row.stage === "REJECTED" &&
+                <TableCell align="center">
+                    This order has been rejected!
                 </TableCell>
               }
 
