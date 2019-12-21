@@ -18,7 +18,7 @@ const dashboardRoutes = [
   {
     path: "/master_data",
     name: "Master Data",
-    icon: Storage, // TODO FIND BETTER
+    icon: Storage,
     component: MasterDataPage,
     layout: "/admin"
   },
