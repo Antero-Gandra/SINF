@@ -40,7 +40,7 @@ export function generateKeyRequest (brandId){
 }
 
 export function subscribeRequest (tenant, organization, company, secretKey){
-    return fetch(apiHost + "/brands/subscribe", {
+    return fetch(apiHost + "/subscription/create", {
         method: 'POST',
         headers: { 
             'Content-Type': 'application/json;charset=utf-8',

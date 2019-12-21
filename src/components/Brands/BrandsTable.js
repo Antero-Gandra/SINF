@@ -45,11 +45,15 @@ export default function BrandsTable() {
   const generateKey = async (brandId) => {
     let generateKeyInvoicePromise = generateKeyRequest (brandId);
 
-    let array = rows;
 
     await generateKeyInvoicePromise.then(response => response.json().then(data => 
       {
-        array[brandId - 1].key = data.secret_key;
+        let array = rows;
+
+        array.find(function(element) {
+            return element.brandId === brandId;
+        }).key = data.secret_key;
+        
         setRows(array);
         setKey(data.secret_key);
       }))
